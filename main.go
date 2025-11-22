@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/esteveseverson/go-rest-rbac/dbconfig"
 	"github.com/esteveseverson/go-rest-rbac/internal/handlers"
 	"github.com/esteveseverson/go-rest-rbac/internal/routes"
 	"github.com/esteveseverson/go-rest-rbac/serverconfig"
@@ -15,6 +16,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to load config %v", err)
 	}
+
+	db := dbconfig.ConnectDB(config.DatabaseURL)
+	defer db.Close()
 
 	handler := handlers.NewHandler()
 

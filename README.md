@@ -10,7 +10,29 @@ Keywords:
 - API REST
 - JWT
 
+## .env example (necessary to run)
+Create .env file in root folder with:
+```bash
+# Server
+SERVER_PORT=
+DATABASE_URL=
+ENVIRONMENT=
+LOG_LEVEL=
+
+# Database
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
+
+```
+
+## Run Database
+```bash
+docker compose up -d
+```
+
 ## Run project
 ```bash
+go mod tidy
 go run main.go
 ```
