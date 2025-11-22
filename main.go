@@ -8,6 +8,7 @@ import (
 	"github.com/esteveseverson/go-rest-rbac/dbconfig"
 	"github.com/esteveseverson/go-rest-rbac/internal/handlers"
 	"github.com/esteveseverson/go-rest-rbac/internal/routes"
+	"github.com/esteveseverson/go-rest-rbac/internal/store"
 	"github.com/esteveseverson/go-rest-rbac/serverconfig"
 )
 
@@ -20,7 +21,9 @@ func main() {
 	db := dbconfig.ConnectDB(config.DatabaseURL)
 	defer db.Close()
 
-	handler := handlers.NewHandler()
+	queries := store.New(db)
+
+	handler := handlers.NewHandler(db, queries)
 
 	mux := http.NewServeMux()
 
